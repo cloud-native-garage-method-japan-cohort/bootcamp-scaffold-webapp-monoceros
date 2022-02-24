@@ -9,12 +9,13 @@ import { useDiscovery, state as recvText } from '../utils/index';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    width: '70%',
+    minWidth: '600px',
     marginTop: '60px',
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    width: 400
+    justifyContent: 'center'
   },
   input: {
     marginLeft: theme.spacing(1),
@@ -63,6 +64,7 @@ const Top = () => {
       >
         <Paper className={classes.root}>
           <InputBase
+            fullWidth={true}
             className={classes.input}
             placeholder="Watson Discovery で検索"
             inputProps={{ 'aria-label': 'search watson discovery' }}
