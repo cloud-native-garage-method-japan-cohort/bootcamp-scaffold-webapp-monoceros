@@ -1,40 +1,39 @@
-import { Paper, Divider, ListItem, ListItemText, Box, Typography, List as muiList } from '@material-ui/core';
+import { Box, Container, Typography, Grid, Card, CardContent, CardActionArea } from '@material-ui/core';
 import * as React from 'react';
 
 import Style from './List.module.css';
 
-const commonStyles = {
-  bgcolor: 'background.paper',
-  m: 1,
-  border: 1,
-  width: '5rem',
-  height: '5rem',
-  borderColor: 'text.primary'
-};
-
 const List = (props) => {
   return props.rectText ? (
-    <muiList sx={{ width: '100%' }}>
-      <Box sx={commonStyles}>
-        {props.rectText.map((rt, index) => (
-          <div key={index}>
-            <ListItem alignItems="flex-start">
-              <ListItemText
-                primary={rt.title}
-                secondary={
-                  <React.Fragment>
-                    <Typography sx={{ display: 'inline' }} component="span" variant="body2" color="text.primary">
-                      {rt.content}
-                    </Typography>
-                  </React.Fragment>
-                }
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-          </div>
-        ))}
-      </Box>
-    </muiList>
+    <div>
+      <Typography align="left" gutterBottom variant="h5" component="div">
+        おすすめ情報一覧
+      </Typography>
+      <div className={Style.listBox}>
+        <Container maxWidth="md">
+          <Box>
+            <Grid container columns={12} spacing={3}>
+              {props.rectText.map((rt, index) => (
+                <Grid item xs={12} key={index}>
+                  <Card className={Style.card}>
+                    <CardActionArea>
+                      <CardContent>
+                        <Typography align="left" gutterBottom variant="h6" component="div">
+                          {rt.title}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {rt.content}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Container>
+      </div>
+    </div>
   ) : (
     ''
   );
