@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { Loading } from '../components/Loading';
 import Layout from '../components/layout/Layout';
 import List from '../components/list/List';
-import { queryDiscovery } from '../utils/index';
+import { useDiscovery, state as recvText } from '../utils/index';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,18 +35,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Top = () => {
+  const [inputText, setInputText] = useState('');
   const [sendText, setSendText] = useState('');
-  const [recvText, setRecvText] = useState({ loading: false });
   const classes = useStyles();
+  useDiscovery(sendText);
 
-  const onPressQuery = async (event) => {
+  const inputTextHandler = (text) => {
+    setInputText(text);
+  };
+
+  const onPressQuery = (event) => {
     event.preventDefault();
-    if (!sendText) return;
-    setRecvText({});
-    const res = await queryDiscovery(sendText);
-
-    setRecvText(res);
-    // setSendText('');
+    if (!inputText) {
+      console.log('no text inputted:');
+      return;
+    }
+    console.log(`inputText:${inputText}`);
+    setSendText(inputText);
   };
 
   return (
@@ -62,7 +67,7 @@ const Top = () => {
             placeholder="Watson Discovery で検索"
             inputProps={{ 'aria-label': 'search watson discovery' }}
             onChange={(e) => {
-              setSendText(e.target.value);
+              inputTextHandler(e.target.value);
             }}
           />
           <IconButton
@@ -75,18 +80,15 @@ const Top = () => {
           </IconButton>
         </Paper>
       </form>
-      {recvText.loading ? (
-        <Loading />
-      ) : (
-        <Grid className={classes.grid}>
-          <Container>
-            <Grid>
-              {/* {recvText.map(rt => <div>{rt.title} {rt.content}</div>)} */}
-              {recvText.value ? <List rectText={recvText.value.data.results} /> : <></>}
-            </Grid>
-          </Container>
-        </Grid>
-      )}
+      <Grid className={classes.grid}>
+        <Container>
+          {sendText.length && recvText.loading ? (
+            <Loading />
+          ) : (
+            <Grid>{recvText.value ? <List rectText={recvText.value.data.results} /> : <></>}</Grid>
+          )}
+        </Container>
+      </Grid>
     </Layout>
   );
 };

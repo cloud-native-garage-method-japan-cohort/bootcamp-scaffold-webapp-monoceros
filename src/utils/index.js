@@ -14,30 +14,13 @@ const api = axios.create({
 
 export let state;
 
-export const queryDiscovery = (searchText) => {
-  //   const res = {
-  //     data: {
-  //      results: [
-  //     {title: "タイトル1", content: "これはコンテンツです1"},
-  //     {title: "タイトル2", content: "これはコンテンツです2"},
-  //     {title: "タイトル3", content: "これはコンテンツです3"},
-  //   ]
-  // }
-  //   }
-  //   return res;
+export const useDiscovery = (searchText) => {
   state = useAsync(async () => {
     const response = await api.get('/api/search', {
       params: {
         query: searchText
       }
     });
-    // const result = await response.text();
     return response;
   }, [searchText]);
-  // return state;
-  // return await api.get('/api/search', {
-  //   params: {
-  //     query: searchText
-  //   }
-  // });
 };
