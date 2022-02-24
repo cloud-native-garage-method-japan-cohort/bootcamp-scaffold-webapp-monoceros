@@ -1,0 +1,35 @@
+{
+  "extends": ["plugin:prettier/recommended", "plugin:react/recommended"],
+  "plugins": ["import", "react"],
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "globals": {
+    "window": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-unused-vars": "warn",
+    "react/react-in-jsx-scope": 0,
+    "sort-imports": 0,
+    "react/prop-types": 0,
+    "import/order": [
+      2,
+      {
+        "alphabetize": { "order": "asc" },
+        "newlines-between": "always",
+        "groups": ["builtin", "external", "parent", "sibling", "index"],
+        "warnOnUnassignedImports": true
+      }
+    ]
+  }
+}
