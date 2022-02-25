@@ -49,11 +49,15 @@ const Top = () => {
     event.preventDefault();
     if (!inputText) {
       console.log('no text inputted:');
+      alert('検索文字を入力してください。');
       return;
     }
     console.log(`inputText:${inputText}`);
     setSendText(inputText);
   };
+  if (recvText.response && recvText.response.status === 500) {
+    alert('エラーです！');
+  }
 
   return (
     <Layout>
