@@ -7,7 +7,7 @@ const List = (props) => {
   return props.rectText ? (
     <div>
       <Typography align="left" gutterBottom variant="h5" component="div">
-        おすすめ情報一覧
+        おすすめ情報一覧 {props.rectText.length}件
       </Typography>
       <div className={Style.listBox}>
         <Container maxWidth="md">
