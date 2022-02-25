@@ -4,6 +4,7 @@
   padding: 2em;
   height: 70vh;
   max-width: 800px;
+  min-width: 800px;
   overflow: auto;
 }
 

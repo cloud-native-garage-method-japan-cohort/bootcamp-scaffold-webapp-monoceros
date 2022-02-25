@@ -21,9 +21,7 @@ const List = (props) => {
                         <Typography align="left" gutterBottom variant="h6" component="div">
                           {rt.title}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {rt.content}
-                        </Typography>
+                        <Typography variant="body2">{rt.content}</Typography>
                       </CardContent>
                     </CardActionArea>
                   </Card>
